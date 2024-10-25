@@ -20,4 +20,4 @@ for slide in prs.slides:
     for shape in slide.shapes:
         if not shape.has_text_frame:
             continue
-        print(shape.text_frame)
+        print(shape.text)
