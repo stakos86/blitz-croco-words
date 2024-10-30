@@ -42,7 +42,7 @@
 # for word in extracted_words_without_spaces:
 #     print(word)
 
-from zipfile import ZipFile
+import zipfile
 from pathlib import Path
 from pptx import Presentation
 from random import choice
@@ -50,8 +50,8 @@ from random import choice
 # Константы
 SRC = 'src'
 
-# Словарь с номерами и соответствующими им именами файлов презентаций
-PPTX_FILES_LIST: list[str] = [
+with zipfile.ZipFile('/Users/Stanislav_Egorov/Documents/GitHub/blitz-croco-words/src/croco-blitz-source.zip', 'r') as zip_file:
+    PPTX_FILES_LIST: list[str] = [
     "Osennyaya_igra_3.pptx",
     "Zimnyaya_igra_1.pptx",
     "Osennyaya_igra_12.pptx",
@@ -104,7 +104,7 @@ def main() -> None:
     # open_pptx_with_pptx_library(str(presentation_path))
 
     # Выбираем случайный файл презентации
-    pptx_file_name = 'Osennyaya_igra_11.pptx'
+    pptx_file_name = choice(PPTX_FILES_LIST)
     presentation_path = Path(presentation_path) / pptx_file_name
     # open_pptx_with_pptx_library(str(presentation_path))
 
