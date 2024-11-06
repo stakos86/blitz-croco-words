@@ -46,22 +46,24 @@ import zipfile
 from pathlib import Path
 from pptx import Presentation
 from random import choice
+from pyaspeller import YandexSpeller
 
 # Константы
 SRC = 'src'
 
-with zipfile.ZipFile('/Users/Stanislav_Egorov/Documents/GitHub/blitz-croco-words/src/croco-blitz-source.zip', 'r') as zip_file:
+with zipfile.ZipFile('/Users/Stanislav_Egorov/Documents/GitHub/blitz-croco-words/src/croco-blitz-source.zip',
+                     'r') as zip_file:
     PPTX_FILES_LIST: list[str] = [
-    "Osennyaya_igra_3.pptx",
-    "Zimnyaya_igra_1.pptx",
-    "Osennyaya_igra_12.pptx",
-    "Osennyaya_igra_11.pptx",
-    "Osennyaya_igra_10.pptx",
-    "Osennyaya_igra_9.pptx",
-    "Osennyaya_igra_6.pptx",
-    "Osennyaya_igra_5.pptx",
-    "Osennyaya_igra_4.pptx"
-]
+        "Osennyaya_igra_3.pptx",
+        "Zimnyaya_igra_1.pptx",
+        "Osennyaya_igra_12.pptx",
+        "Osennyaya_igra_11.pptx",
+        "Osennyaya_igra_10.pptx",
+        "Osennyaya_igra_9.pptx",
+        "Osennyaya_igra_6.pptx",
+        "Osennyaya_igra_5.pptx",
+        "Osennyaya_igra_4.pptx"
+    ]
 
 
 def open_pptx_with_pptx_library(presentation_path):
@@ -95,6 +97,21 @@ def write_txt(filename: str, words: list[str]):
         print(f"Ошибка при записи в файл: {e}")
 
 
+# def only_one_word(line: str) -> bool:
+#     return ' ' not in line
+
+# Задача 2024.10.30.02
+#
+# Напишите тест, который проверяет, что в строке находится всего одно слово.
+def is_not_valid(text: str) -> bool:
+    return ' ' in text or '-' in text or ':' in text or 'СУПЕРКРОКО' in text
+
+
+# def test_only_one_word():
+#     assert only_one_word(' ') == False
+#     assert only_one_word('word') == True
+
+
 def main() -> None:
     # Извлекаем файл презентации
     # extract_pptx_from_zip(SRC, FILENAME_ZIP, EXTRACTION_DIR)
@@ -110,6 +127,9 @@ def main() -> None:
 
     # Извлекаем слова из презентации
     extracted_words = extract_words_from_pptx(str(presentation_path))
+
+    # Проверка на наличие только одного слова в строке
+
 
     # Записываем извлеченные слова в txt-файл
     write_txt('words.txt', extracted_words)
