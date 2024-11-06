@@ -1,6 +1,8 @@
-import zipfile
 import os
+import zipfile
+
 from pptx import Presentation
+
 
 def extract_pptx_from_zip(zip_filename, pptx_filename, extract_path):
     # Распаковываем zip-файл
@@ -26,6 +28,7 @@ def extract_pptx_from_zip(zip_filename, pptx_filename, extract_path):
         for shape in slide.shapes:
             if hasattr(shape, "text"):
                 print(shape.text)
+
 
 # Пример использования
 zip_filename = '/Users/Stanislav_Egorov/Documents/GitHub/blitz-croco-words/src/croco-blitz-source.zip'  # Имя zip-файла
