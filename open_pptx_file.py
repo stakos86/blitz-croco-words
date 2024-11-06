@@ -81,7 +81,7 @@ def extract_words_from_pptx(presentation_path):
         for shape in slide.shapes:
             if hasattr(shape, 'text'):
                 text = shape.text
-                if ' ' in text or ':' in text or 'БЛИЦ-КРОКОДИЛ' in text:
+                if is_not_valid(text):
                     continue
                 words.append(text.strip())
     return words
@@ -107,9 +107,20 @@ def is_not_valid(text: str) -> bool:
     return ' ' in text or '-' in text or ':' in text or 'СУПЕРКРОКО' in text
 
 
+# Задача 2024.10.30.03
+#
+
 # def test_only_one_word():
 #     assert only_one_word(' ') == False
 #     assert only_one_word('word') == True
+
+# Напишите тест, который проверяет, что в списке находятся только строки, состоящие из одного слова, без пробелов,
+# цифр или знаков препинания.
+def test_is_valid_list() -> None:
+    path = '/Users/Stanislav_Egorov/Documents/GitHub/blitz-croco-words/src/croco-blitz-source/Osennyaya_igra_3.pptx'
+    result = extract_words_from_pptx(path)
+    for word in result:
+        assert is_not_valid(word) == False
 
 
 def main() -> None:
@@ -129,7 +140,6 @@ def main() -> None:
     extracted_words = extract_words_from_pptx(str(presentation_path))
 
     # Проверка на наличие только одного слова в строке
-
 
     # Записываем извлеченные слова в txt-файл
     write_txt('words.txt', extracted_words)
