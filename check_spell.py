@@ -1,7 +1,7 @@
 from pyaspeller import YandexSpeller
 
 if __name__ == "__main__":
-    spisok = list["Колакал", "малако"]
+    spisok = ["Колакал", "малако"]
     speller = YandexSpeller()
-    result = speller.spelled(spisok)
+    result = speller.spelled(' '.join(spisok))
     print(result)
